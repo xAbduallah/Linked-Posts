@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f3f4f6;
+    --bg-tertiary: #e5e7eb;
+
+    --text-primary: #111827;
+    --text-secondary: #4B5563;
+    --text-tertiary: #6B7280;
+
+    --border-primary: #e5e7eb;
+    --border-secondary: #d1d5db;
+
+    --shadow: rgba(145, 158, 171, .2) 0px 2px 4px -1px,
+        rgba(145, 158, 171, .14) 0px 4px 5px 0px,
+        rgba(145, 158, 171, .12) 0px 1px 10px 0px;
+    --font-family: 'Encode Sans Expanded', sans-serif;
+    --rating-color: #ffc908;
+}
+
+.dark {
+    --bg: #1C1C1D;
+
+    --bg-primary: var(--bg);
+    --bg-secondary: #252728;
+    --bg-tertiary: #333334;
+
+    --text-primary: white;
+    --text-secondary: color-mix(in srgb, var(--text-primary) 50%, gray);
+    --text-tertiary: color-mix(in srgb, var(--text-primary) 10%, gray);
+
+    --border-primary: color-mix(in srgb, var(--bg) 40%, white);
+    --border-secondary: color-mix(in srgb, var(--bg) 60%, white);
+
+    --shadow: rgba(0, 0, 0, 0.3) 0px 2px 4px -1px,
+        rgba(0, 0, 0, 0.24) 0px 4px 5px 0px,
+        rgba(0, 0, 0, 0.22) 0px 1px 10px 0px;
+}
+
+body {
+    font-family: var(--font-family) !important;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 7px;
+    background-color: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: var(--bg-primary);
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
