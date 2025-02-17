@@ -13,7 +13,7 @@ export default function CreatePost() {
     const [isExpanded, setIsExpanded] = useState(false);
     const [showEmojis, setShowEmojis] = useState(false);
     const [creatingPost, setCreatingPost] = useState(false);
-    const { user, token } = useSelector((state: any) => state.userCache);
+    const { user, token, isLoggedIn } = useSelector((state: any) => state.userCache);
     const [mediaPreview, setMediaPreview] = useState<string | null>(null);
     const [mediaType, setMediaType] = useState<'photo' | 'video' | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -91,10 +91,10 @@ export default function CreatePost() {
                 setCreatingPost(false);
             });
     };
-
+    
     return (
         <div className="rounded-xl bg-[var(--bg-secondary)] p-4 shadow-[var(--bg-secondary)] mx-auto text-center">
-            {(!user || !token) ? <Link href="/Auth/Login" className='p-4 bg-[var(--bg-secondary)] rounded-xl text-xl font-semibold cursor-pointer hover:text-[var(--text-secondary)]'>Login to create a post</Link> :
+            {!isLoggedIn ? <Link href="/Auth/Login" className='p-4 bg-[var(--bg-secondary)] rounded-xl text-xl font-semibold cursor-pointer hover:text-[var(--text-secondary)]'>Login to create a post</Link> :
                 <div className="flex items-start space-x-4">
                     <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-full bg-[var(--bg-secondary)]">
                         {user?.photo ? (

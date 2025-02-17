@@ -7,7 +7,7 @@ import { IPost } from '@/Interfaces/Post'
 import PostItem from './Items/PostItem'
 
 export default function LatestPosts() {
-    const { token } = useSelector((state: any) => state.userCache);
+    const { token, isLoggedIn } = useSelector((state: any) => state.userCache);
 
     const { data: postsData, isLoading } = useQuery({
         queryKey: ['latestPosts'],
@@ -47,7 +47,7 @@ export default function LatestPosts() {
     return (
         <div className="mt-5">
             <div className="mx-auto space-y-6">
-                {posts.map((post: IPost) => (
+                {!isLoggedIn ? <></> : posts.map((post: IPost) => (
                     <div 
                         key={post._id} 
                         className="bg-[var(--bg-secondary)] px-8 py-4 rounded-xl shadow-md"

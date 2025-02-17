@@ -85,7 +85,7 @@ export default function Register() {
                                         id="name"
                                         name="name"
                                         type="text"
-                                        className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-700 px-3 py-2 text-white placeholder-gray-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+                                        className="formik-field w-full p-2 bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg"
                                         placeholder="Enter your name"
                                     />
                                     <ErrorMessage
@@ -104,7 +104,7 @@ export default function Register() {
                                         id="email"
                                         name="email"
                                         type="email"
-                                        className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-700 px-3 py-2 text-white placeholder-gray-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+                                        className="formik-field w-full p-2 bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg"
                                         placeholder="Enter your email"
                                     />
                                     <ErrorMessage
@@ -123,7 +123,7 @@ export default function Register() {
                                         id="password"
                                         name="password"
                                         type="password"
-                                        className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-700 px-3 py-2 text-white placeholder-gray-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+                                        className="formik-field w-full p-2 bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg"
                                         placeholder="Enter your password"
                                     />
                                     <ErrorMessage
@@ -141,7 +141,7 @@ export default function Register() {
                                         id="rePassword"
                                         name="rePassword"
                                         type="password"
-                                        className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-700 px-3 py-2 text-white placeholder-gray-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+                                        className="formik-field w-full p-2 bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg"
                                         placeholder="Confirm your password"
                                     />
                                     <ErrorMessage
@@ -160,7 +160,7 @@ export default function Register() {
                                         id="dateOfBirth"
                                         name="dateOfBirth"
                                         type="date"
-                                        className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-700 px-3 py-2 text-white placeholder-gray-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+                                        className="formik-field w-full p-2 bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg"
                                     />
                                     <ErrorMessage
                                         name="dateOfBirth"
@@ -179,7 +179,7 @@ export default function Register() {
                                         id="gender"
                                         name="gender"
                                         value="Male"
-                                        className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-700 px-3 py-2 text-white placeholder-gray-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+                                        className="formik-field w-full p-2 bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg"
                                     >
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>

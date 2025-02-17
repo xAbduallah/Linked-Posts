@@ -1,7 +1,9 @@
 import { AppDispatch } from '@/lib/store';
 import { getUserData } from '@/lib/userCache';
+import { userActions } from '@/lib/userCache';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { createContext, useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 export type InitializerContextType = {
     darkMode: boolean;
@@ -10,10 +12,12 @@ export type InitializerContextType = {
 export const InitializerContext = createContext<InitializerContextType | null>(null);
 
 export default function AppInitializer({ children }: { children: React.ReactNode }) {
+    const dispatch = useDispatch<AppDispatch>();
     const [darkMode, setDarkMode] = useState(false);
-
+    const { user, token: userToken } = useSelector((state: any) => state.userCache);
+    const { setToken } = userActions;
     useEffect(() => {
-        const savedTheme = localStorage.getItem('theme');
+        const savedTheme = Cookies.get('theme');
         if (savedTheme) {
             setDarkMode(savedTheme === 'dark');
         } else {
@@ -24,10 +28,10 @@ export default function AppInitializer({ children }: { children: React.ReactNode
     useEffect(() => {
         if (darkMode) {
             document.documentElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
+            Cookies.set('theme', 'dark');
         } else {
             document.documentElement.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
+            Cookies.set('theme', 'light');
         }
     }, [darkMode]);
 
@@ -35,21 +39,18 @@ export default function AppInitializer({ children }: { children: React.ReactNode
         setDarkMode((prev) => !prev);
     };
 
-    const [token, setToken] = useState<string | null>(null);
-
     useEffect(() => {
-        const storedToken = localStorage.getItem('token');
-        setToken(storedToken);
+        const token = Cookies.get('token');
+        if (!userToken && token) {
+            dispatch(setToken(token));
+        }
     }, []);
 
-    const { user } = useSelector((state: any) => state.userCache);
-    const dispatch = useDispatch<AppDispatch>();
-
     useEffect(() => {
-        if (token && !user) {
-            dispatch(getUserData(token));
+        if (userToken && !user) {
+            dispatch(getUserData(userToken));
         }
-    }, [token, user, dispatch]);
+    }, [dispatch, userToken]);
 
     return (
         <InitializerContext.Provider value={{ darkMode, toggleDarkMode }}>

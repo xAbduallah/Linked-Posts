@@ -10,12 +10,19 @@ import PostItem from '@/app/(Global)/Items/PostItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { CalendarDays, Loader, MapPin } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function Profile() {
 
     const { token, user } = useSelector((state: any) => state.userCache);
-    const { handleLogout } = userActions;
+    const { logoutUser } = userActions;
     const dispatch = useDispatch();
+    const router = useRouter();
+
+    async function handleLogout() {
+        await dispatch(logoutUser());
+        router.push('/');
+    }
 
     const { data: postsData, isLoading: postsLoading } = useQuery({
         queryKey: ['myPosts', user?._id],
@@ -111,7 +118,7 @@ export default function Profile() {
                     </div>
 
                     <div className='flex self-start gap-2'>
-                        <button className='bg-[rgba(255,0,0,0.9)] text-[var(--text-primary)] px-4 py-2 rounded-xl cursor-pointer' onClick={() => { dispatch(handleLogout()); }}>Logout</button>
+                        <button className='bg-[rgba(255,0,0,0.9)] text-[var(--text-primary)] px-4 py-2 rounded-xl cursor-pointer' onClick={handleLogout}>Logout</button>
                     </div>
                 </div>
             </div>

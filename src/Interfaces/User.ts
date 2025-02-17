@@ -10,7 +10,7 @@ export interface IUser {
 
 export interface UserState {
     user: IUser | null;
-    token: string;
+    token: string | null;
     isLoggedIn: boolean;
     isLoading: boolean;
     message: string | null;

@@ -28,8 +28,8 @@ export default function Login() {
         <section className="flex min-h-[80vh] items-center justify-center px-4">
             <div className="w-full max-w-md space-y-8 rounded-xl bg-[var(--bg-secondary)] p-8 shadow-lg shadow-gray-600/50">
                 <div>
-                    <h1 className="text-3xl font-bold text-center text-white">Login</h1>
-                    <p className="mt-2 text-center text-gray-400">Welcome back!</p>
+                    <h1 className="text-3xl font-bold text-center text-[var(--text-primary)]">Login</h1>
+                    <p className="mt-2 text-center text-[var(--text-secondary)]">Welcome back!</p>
                 </div>
 
                 <Formik initialValues={{
@@ -46,14 +46,14 @@ export default function Login() {
                         <Form className="mt-8 space-y-6">
                             <div className="space-y-4">
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                                    <label htmlFor="email" className="block text-sm font-medium text-[var(--text-secondary)]">
                                         Email
                                     </label>
                                     <Field
                                         id="email"
                                         name="email"
                                         type="email"
-                                        className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-700 px-3 py-2 text-white placeholder-gray-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+                                        className="formik-field w-full p-2 bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg"
                                         placeholder="Enter your email"
                                     />
                                     <ErrorMessage name="email" component="div" className="mt-1 text-sm text-red-500"/>
@@ -67,7 +67,7 @@ export default function Login() {
                                         id="password"
                                         name="password"
                                         type="password"
-                                        className="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-700 px-3 py-2 text-white placeholder-gray-400 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+                                        className="formik-field w-full p-2 bg-[var(--bg-primary)] text-[var(--text-primary)] rounded-lg"
                                         placeholder="Enter your password"
                                     />
                                     <ErrorMessage
