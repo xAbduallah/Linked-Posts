@@ -52,7 +52,7 @@ function InitLoginReducer(builder: any) {
 }
 
 function InitUserDataReducer(builder: any) {
-    builder.addCase(getUserData.fulfilled, (state: any, action: any) => {        
+    builder.addCase(getUserData.fulfilled, (state: any, action: any) => {
         if (action.payload.message === "success") {
             state.isLoggedIn = true;
             state.user = action.payload.user;
@@ -76,7 +76,7 @@ export const userCache = createSlice({
     name: 'userCache',
     initialState,
     reducers: {
-        handleLogout: (state, action) => {
+        handleLogout: (state) => {
             state.isLoggedIn = false;
             state.user = null;
             state.token = "";

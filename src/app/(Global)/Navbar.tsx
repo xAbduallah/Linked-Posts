@@ -1,12 +1,16 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
-import { Mail, Bell, Menu, User, Home, Search } from 'lucide-react';
+import { User, Home, Search, Sun, Moon } from 'lucide-react';
+import { InitializerContext, InitializerContextType } from '@/Context/AppInitializer';
 
 export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const { user, isLoggedIn } = useSelector((state: any) => state.userCache);
+    const context = useContext(InitializerContext);
+    const { darkMode, toggleDarkMode } = context ? context : { darkMode: false, toggleDarkMode: () => {} };
+
+    const { user } = useSelector((state: any) => state.userCache);
 
     const mobileMenuRef = useRef<HTMLDivElement>(null);
 
@@ -30,7 +34,7 @@ export default function Navbar() {
                     {/* Logo Section */}
                     <div className="flex items-center gap-2">
                         <Link href="/" className="flex items-center gap-2">
-                            <span className="text-xl font-bold bg-gradient-to-r from-white to-white/50 bg-clip-text text-transparent">
+                            <span className="text-xl font-bold bg-gradient-to-r from-[var(--text-primary)] to-[var(--text-tertiary)] bg-clip-text text-transparent">
                                 LINKED POSTS
                             </span>
                         </Link>
@@ -49,7 +53,14 @@ export default function Navbar() {
                     </div>
 
                     {/* Navigation - Desktop */}
-                    <div className="hidden md:flex items-center gap-2">
+                    <div className="flex items-center gap-2">
+                        <button onClick={toggleDarkMode} className="p-2 rounded-full bg-[var(--bg-tertiary)] hover:bg-[var(--bg-primary)] transition-colors">
+                            {darkMode ? (
+                                <Sun className="w-5 h-5 text-yellow-500" />
+                            ) : (
+                                <Moon className="w-5 h-5 text-gray-700" />
+                            )}
+                        </button>
                         <Link href="/" className="p-2 rounded-full hover:bg-[var(--bg-tertiary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
                             <Home className="h-8 w-8" />
                         </Link>
@@ -69,49 +80,8 @@ export default function Navbar() {
                             </Link>
                         </div>
                     </div>
-
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="md:hidden p-2 rounded-full hover:bg-[var(--bg-tertiary)] text-[var(--text-secondary)]"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    >
-                        <Menu className="h-6 w-6" />
-                    </button>
                 </div>
             </div>
-
-            {/* Mobile Menu */}
-            {isMobileMenuOpen && (
-                <div ref={mobileMenuRef} className="md:hidden border-t border-[var(--border-secondary)]">
-                    <div className="px-4 py-3 space-y-3">
-                        {/* Mobile Search */}
-                        <div className="relative">
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[var(--text-secondary)]" />
-                            <input
-                                type="text"
-                                placeholder="Search..."
-                                className="w-full bg-[var(--bg-tertiary)] rounded-full py-2 pl-10 pr-4 focus:outline-none"
-                            />
-                        </div>
-
-                        <button className="flex w-full items-center justify-between p-2 rounded-lg hover:bg-[var(--bg-tertiary)] text-[var(--text-secondary)]">
-                            <span className="flex items-center gap-3">
-                                <Mail className="h-6 w-6" />
-                                Messages
-                            </span>
-                            <span className="bg-blue-500 px-2 py-1 rounded-full text-xs text-white">4</span>
-                        </button>
-
-                        <button className="flex w-full items-center justify-between p-2 rounded-lg hover:bg-[var(--bg-tertiary)] text-[var(--text-secondary)]">
-                            <span className="flex items-center gap-3">
-                                <Bell className="h-6 w-6" />
-                                Notifications
-                            </span>
-                            <span className="bg-blue-500 px-2 py-1 rounded-full text-xs text-white">17</span>
-                        </button>
-                    </div>
-                </div>
-            )}
         </nav>
     );
 }

@@ -3,16 +3,23 @@ import { getUserData } from '@/lib/userCache';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { createContext, useState, useEffect } from 'react';
 
-export const InitializerContext = createContext({});
+export type InitializerContextType = {
+    darkMode: boolean;
+    toggleDarkMode: () => void;
+};
+export const InitializerContext = createContext<InitializerContextType | null>(null);
 
 export default function AppInitializer({ children }: { children: React.ReactNode }) {
-    const [darkMode, setDarkMode] = useState(() => {
+    const [darkMode, setDarkMode] = useState(false);
+
+    useEffect(() => {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
-            return savedTheme === 'dark';
+            setDarkMode(savedTheme === 'dark');
+        } else {
+            setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
         }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    });
+    }, []);
 
     useEffect(() => {
         if (darkMode) {
@@ -25,22 +32,28 @@ export default function AppInitializer({ children }: { children: React.ReactNode
     }, [darkMode]);
 
     const toggleDarkMode = () => {
-        setDarkMode(prev => !prev);
+        setDarkMode((prev) => !prev);
     };
 
-    const token = localStorage.getItem('token');
-    const { user } = useSelector((state: any) => state.userCache);
+    const [token, setToken] = useState<string | null>(null);
 
+    useEffect(() => {
+        const storedToken = localStorage.getItem('token');
+        setToken(storedToken);
+    }, []);
+
+    const { user } = useSelector((state: any) => state.userCache);
     const dispatch = useDispatch<AppDispatch>();
+
     useEffect(() => {
         if (token && !user) {
             dispatch(getUserData(token));
         }
-    }, [token]);
+    }, [token, user, dispatch]);
 
     return (
         <InitializerContext.Provider value={{ darkMode, toggleDarkMode }}>
             {children}
         </InitializerContext.Provider>
     );
-} 
+}

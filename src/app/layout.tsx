@@ -9,15 +9,6 @@ import { store } from "@/lib/store";
 import AppInitializer from "@/Context/AppInitializer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 export default function RootLayout({ children }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -26,17 +17,15 @@ export default function RootLayout({ children }: Readonly<{
 
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>
         <Provider store={store}>
           <AppInitializer>
-            <main className="dark min-h-screen">
+            <main className="min-h-screen">
               <QueryClientProvider client={queryClient}>
                 <div className="mt-28">
                   <Navbar />
                   <AppRouterCacheProvider>
-                    <div className="mx-[20%]">
-                      {children}
-                    </div>
+                    {children}
                   </AppRouterCacheProvider>
                 </div>
               </QueryClientProvider>

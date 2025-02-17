@@ -46,7 +46,7 @@ export default function LatestPosts() {
 
     return (
         <div className="mt-5">
-            <div className="w-[70%] mx-auto space-y-6">
+            <div className="mx-auto space-y-6">
                 {posts.map((post: IPost) => (
                     <div 
                         key={post._id} 

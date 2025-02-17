@@ -9,8 +9,10 @@ export default function Home() {
 
   return (
     <section className="flex flex-col items-center justify-start">
-      <CreatePost />
-      <LatestPosts />
+      <div className="w-[90%] md:w-[80%] lg:w-[70%] 2xl:w-[50%]">
+        <CreatePost />
+        <LatestPosts />
+      </div>
     </section>
   );
 }

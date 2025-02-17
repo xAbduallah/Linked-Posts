@@ -4,7 +4,7 @@ import { ImagePlus, Loader2, SendHorizontal, Smile, Video, X } from 'lucide-reac
 import { useState, useRef, useEffect } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import axios from 'axios';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 
 export default function CreatePost() {
@@ -93,7 +93,7 @@ export default function CreatePost() {
     };
 
     return (
-        <div className="w-[70%] rounded-xl bg-[var(--bg-secondary)] p-4 shadow-[var(--bg-secondary)] mx-auto text-center">
+        <div className="rounded-xl bg-[var(--bg-secondary)] p-4 shadow-[var(--bg-secondary)] mx-auto text-center">
             {(!user || !token) ? <Link href="/Auth/Login" className='p-4 bg-[var(--bg-secondary)] rounded-xl text-xl font-semibold cursor-pointer hover:text-[var(--text-secondary)]'>Login to create a post</Link> :
                 <div className="flex items-start space-x-4">
                     <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-full bg-[var(--bg-secondary)]">
@@ -177,7 +177,7 @@ export default function CreatePost() {
                                                         <div className="absolute z-50">
                                                             <EmojiPicker
                                                                 onEmojiClick={onEmojiClick}
-                                                                theme="dark"
+                                                                // theme="dark"
                                                                 searchDisabled
                                                                 skinTonesDisabled
                                                                 height={400}

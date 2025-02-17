@@ -53,9 +53,9 @@ export default function Profile() {
     }
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="w-full flex flex-col items-center px-4 py-8">
             {/* Profile Header */}
-            <div className="relative mb-8">
+            <div className="relative mb-8 w-[70%]">
                 {/* Cover */}
                 <div className="h-48 w-full rounded-xl bg-[#00487D]">
                     <img
@@ -116,26 +116,28 @@ export default function Profile() {
                 </div>
             </div>
 
-            <div className="mb-8">
-                <CreatePost />
-            </div>
+            <div className='md:w-[80%] lg:w-[70%] 2xl:w-[50%]'>
+                <div className="mb-8">
+                    <CreatePost />
+                </div>
 
-            {/* Posts */}
-            <div className="w-[70%] space-y-6 mx-auto">
-                {posts?.length === 0 ? (
-                    <div className="text-center py-8 bg-[var(--bg-secondary)] rounded-xl">
-                        <h2 className="text-xl font-semibold text-[var(--text-primary)]">No posts yet</h2>
-                        <p className="text-[var(--text-secondary)] mt-2">
-                            Share your first post with the community!
-                        </p>
-                    </div>
-                ) : (
-                    posts?.map((post: IPost) => (
-                        <div key={post._id} className="bg-[var(--bg-secondary)] px-8 py-4 rounded-xl shadow-md">
-                            <PostItem post={post} />
+                {/* Posts */}
+                <div className="space-y-6 mx-auto">
+                    {posts?.length === 0 ? (
+                        <div className="text-center py-8 bg-[var(--bg-secondary)] rounded-xl">
+                            <h2 className="text-xl font-semibold text-[var(--text-primary)]">No posts yet</h2>
+                            <p className="text-[var(--text-secondary)] mt-2">
+                                Share your first post with the community!
+                            </p>
                         </div>
-                    ))
-                )}
+                    ) : (
+                        posts?.map((post: IPost) => (
+                            <div key={post._id} className="bg-[var(--bg-secondary)] px-8 py-4 rounded-xl shadow-md">
+                                <PostItem post={post} />
+                            </div>
+                        ))
+                    )}
+                </div>
             </div>
         </div>
     );
